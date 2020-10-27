@@ -1,0 +1,37 @@
+IMPLEMENTAÇÕES
+
+-> foi implementada uma classe entidade Log, para representar
+a tabela de log no banco, com os atributos:
+id = tipo autoincrement, que gera automatico, culuna identificadora .
+tipoDaEntrada = do tipo enum tem os tipos fixo de operações possiveis
+idDoObjetoAlterado = é o ID do objeto que foi manipulado no banco.
+classeDoObjetoAlterado = nome da classe "entidade" manipulada.
+
+-> foi implementada a classe DAOGenericoDecorator<T> que implementa interface DAOGenericoInterface<T>
+Foi utilizado Generics na  Classe, assim poderemos utilizar esta “variável” em todo escopo da classe
+Essa classe possui os atributos:
+daoDecorado - do Tipo DAOGenericoInterface<T>, ele é responsavel
+por decorar o daoGenerico, estou adicionando a camada de log ao
+processo de inserção, remoção, leitura e atualização do daoGenerico
+sessionFactory - pra manipular conexao com banco.
+
+    -> Metodos
+    saveLog()
+        Este metodo foi criado para evitar o processo de
+        repetir codigo para busca de id e nome da classe
+        por reflection, ele recebe um objeto T generico e
+        um objeto Log, no final salva o log no banco.
+
+    create(T o)
+        faz uma inserção na tabela log
+        do tipo criação e salva o objeto recebido a partir do daoDecorado
+    remove(T o)
+        faz uma inserção na tabela log
+        do tipo remover e remove o objeto recebido a partir do daoDecorado
+    update(T o)
+        faz uma inserção na tabela log
+        do tipo atualizacao e autializa o objeto recebido a partir do daoDecorado
+    getById(Serializable id)
+        obtem o objeto apartir do Id a partir do daoDecorado
+        faz uma inserção na tabela log do tipo Leitura e retorna
+        o objeto obtido
